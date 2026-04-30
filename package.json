@@ -1,6 +1,6 @@
 {
   "name": "@signallayer/brand-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Signal Layer brand kit — design tokens, fonts, Logo/Footer/CursorGlow components, and brand assets. Source-only distribution: works with Vite, Next.js, or any bundler that handles TS/TSX from node_modules.",
   "type": "module",
   "main": "./src/index.ts",
