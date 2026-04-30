@@ -11,12 +11,15 @@ This package is the canonical source of brand truth. If you're spinning up a new
 Install directly from GitHub (no NPM registry needed):
 
 ```bash
-# pin to a tag (recommended)
-npm install github:signalyer/signal-layer-brand-kit#v0.1.0
+# RECOMMENDED — pin to a commit SHA, not a tag
+npm install github:signalyer/signal-layer-brand-kit#<full-sha>
 
-# or pin to main (auto-updates on npm install)
-npm install github:signalyer/signal-layer-brand-kit#main
+# Tags work but are unreliable: npm caches GitHub tags by URL+ref and
+# will continue serving stale content even after a tag is force-moved.
+# SHAs are content-addressed, so they never go stale.
 ```
+
+To find the latest SHA, see the README at the top of `main` or `git log` the kit repo. After installing, the package `@signallayer/brand-kit` resolves from `node_modules`.
 
 Peer deps you must already have in your app:
 - `react` (>= 18)
@@ -97,6 +100,26 @@ import faviconUrl from '@signallayer/brand-kit/assets/favicon.svg?url';
 
 ---
 
+## Surfaces and contrast — read this before using `<Logo>` or `<Footer>`
+
+The kit ships **only a dark theme**. Every component (`<Logo>`, `<Footer>`, `<CursorGlow>`) is designed to render on a dark canvas using the HSL tokens in `tokens.css` (`--background`, `--foreground`, `--card`, `--muted`, `--border`, etc.). The wordmark in `<Logo>` uses `text-foreground` for "Signal" — on a dark surface that reads as light gray, but on `bg-white` it disappears.
+
+**Don't put kit components on raw light surfaces.** Specifically:
+
+| Container background | Result |
+|---|---|
+| `bg-background` (default body) | ✅ correct |
+| `bg-card` (elevated chrome — header, nav) | ✅ correct |
+| `bg-muted`, `bg-secondary` (subtle elevated panels) | ✅ correct |
+| `bg-white`, `bg-gray-50/100`, `bg-slate-50/100` | ❌ "Signal" wordmark goes invisible, tagline barely readable |
+| Any custom hex like `#fff`, `#fafafa`, `#f5f5f5` | ❌ same problem |
+
+If you need a header band that stands out from `bg-background`, use `bg-card` — it's a touch lighter than the body but still firmly in the dark family. Borders should use `border-border` or `border-border/40`, not `border-gray-200`.
+
+If you find yourself wanting a light-bg surface for any reason, the kit isn't the right fit — talk to brand before introducing a light-mode variant.
+
+---
+
 ## Brand rules — these are non-negotiable
 
 1. **The brand lockup tagline is ALWAYS "AI Platform"** — never substitute with a product name. Product names live in a SEPARATE slot beside the lockup with a vertical divider:
@@ -136,9 +159,9 @@ Consumers either pin to a tag (`#v0.1.0`) or track `main`. Recommended: pin tags
 
 ## Apps consuming this kit
 
-- `signalyer/ai-roi-framework` → `roi.signallayer.ai` (when domain is wired)
+- `signalyer/ai-roi-framework` → `airoiframework.signallayer.ai`
 - `signalyer/career-reality-engine` → `role.signallayer.ai`
-- (lens, labs, future apps...)
+- `signalyer/signal-claude-efficiency` → `lens.signallayer.ai`
 
 The marketing site (`signalyer/slaiprodwebsite`) is the visual source of truth — this kit codifies the patterns it uses, so consumer apps look identical to it without re-reading its source.
 

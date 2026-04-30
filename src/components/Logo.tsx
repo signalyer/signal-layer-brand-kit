@@ -34,6 +34,12 @@ const SIZE_CLASSES: Record<NonNullable<LogoProps['size']>, { box: string; text: 
  * - Wordmark: "Signal" foreground + "Layer" with .gradient-text
  * - Hover: scale 1.08, tap: scale 0.95 (spring physics via framer-motion)
  *
+ * REQUIRES A DARK CANVAS. The wordmark uses `text-foreground` (light) and
+ * `text-muted-foreground` (medium-light) — both will go nearly invisible on
+ * `bg-white` or any other light surface. Place this on `bg-background`,
+ * `bg-card`, `bg-muted`, or `bg-secondary`. Never on raw white. See the
+ * README's "Surfaces and contrast" section for the full table.
+ *
  * The brand lockup tagline is ALWAYS "AI Platform" — never substitute
  * with a product name. Product names go in a SEPARATE slot, e.g.:
  *
