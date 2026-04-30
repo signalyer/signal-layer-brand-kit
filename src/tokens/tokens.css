@@ -1,0 +1,133 @@
+/*
+ * Signal Layer brand tokens — dark theme.
+ * Import this in your app's global CSS, after the Tailwind directives:
+ *
+ *   @import '@signallayer/brand-kit/tokens.css';
+ */
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --background: 222 28% 5%;
+    --foreground: 210 30% 96%;
+    --card: 222 24% 9%;
+    --card-foreground: 210 30% 96%;
+    --popover: 222 24% 9%;
+    --popover-foreground: 210 30% 96%;
+
+    /* Brand colors */
+    --primary: 172 72% 42%;
+    --primary-foreground: 222 28% 5%;
+    --secondary: 222 22% 13%;
+    --secondary-foreground: 210 30% 96%;
+    --muted: 222 18% 14%;
+    --muted-foreground: 215 16% 65%;
+    --accent: 188 85% 48%;
+    --accent-foreground: 222 28% 5%;
+    --destructive: 0 72% 58%;
+    --destructive-foreground: 210 30% 96%;
+
+    /* Form fields & focus */
+    --border: 222 18% 18%;
+    --input: 222 18% 14%;
+    --ring: 172 72% 42%;
+
+    /* Geometry */
+    --radius: 0.75rem;
+
+    /* Brand gradients & shadows */
+    --gradient-primary: linear-gradient(135deg, hsl(172 72% 42%), hsl(200 85% 52%));
+    --gradient-hero: linear-gradient(180deg, hsl(222 28% 5%) 0%, hsl(222 28% 7%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(222 24% 11%), hsl(222 24% 7%));
+    --gradient-glow: radial-gradient(ellipse at 50% 0%, hsl(172 72% 42% / 0.12), transparent 60%);
+
+    --shadow-glow: 0 0 60px hsl(172 72% 42% / 0.25);
+    --shadow-card: 0 4px 30px hsl(0 0% 0% / 0.4);
+    --shadow-primary: 0 8px 32px hsl(172 72% 42% / 0.2);
+
+    /* Background dot-grid */
+    --dot-color: hsl(172 72% 42% / 0.10);
+
+    color-scheme: dark;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html, body, #root, #__next {
+    height: 100%;
+    background-color: hsl(var(--background));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'DM Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Syne', system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  .num, .mono {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-card {
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.8);
+  }
+
+  .glow-primary {
+    box-shadow: var(--shadow-primary);
+  }
+
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .gradient-hero-bg {
+    background: var(--gradient-hero);
+    position: relative;
+  }
+  .gradient-hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-glow);
+    pointer-events: none;
+  }
+}
+
+/* Form inputs */
+input[type='range'] {
+  accent-color: hsl(var(--primary));
+}
+
+/* Custom scrollbar (webkit) */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: hsl(var(--background)); }
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--border)); }
